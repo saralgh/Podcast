@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div>
+    <h1>Bienvenido a Dark Podcast!! </h1>
+
+    Para acceder a todo el contenido prueba a 
+
+    <a href="{{ path('app_login') }}">loggearte</a>
+
+    o si no tiene cuenta todavía
+
+    <a href="{{ path('app_register') }}">registrate</a>!!
+</div>
+{% endblock %}

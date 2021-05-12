@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+    <style>
+        .modal {display: block}
+        .modalOff{display: none}
+    </style>
+
+{% if app.user %}
+    <div class="mb-3">
+        You are logged in as <span id="username" name="username">{{ app.user.username }}</span>, <a href="{{ path('app_logout') }}">Logout</a><br>
+    </div>
+{% endif %}
+
+<div class="container">
+    {% if app.user.username is defined %}
+        {% set email = app.user.username %}
+    {% endif %}
+    <h1>Hola {{ email }}!!</h1>
+
+    <h2>Sube tu nuevo podcast</h2>
+    <form action="{{ path('nuevoPodcast') }}" method="post" id="newPodcast" name="newPodcast" enctype="multipart/form-data">
+        <div class="row">
+            <label for="titulo">Titulo: </label>
+            <input type="text" id="titulo" name="titulo">
+        </div>
+        <div class="row">
+            <label for="descripcion">Descripción: </label>
+            <textarea rows="4" cols="50" id="descripcion" name="descripcion"></textarea>
+        </div>
+        <div class="row">
+            <label for="audio">Tu fichero de audio: </label>
+            <input type="file" id="audio" name="audio" accepts="audio/*">
+        </div>
+        <div class="row">
+            <label for="imagen">Una imagen: </label>
+            <input type="file" id="imagen" name="imagen" accepts="image/*">
+        </div>
+        <input type="hidden" value="{{ email }}" id="username" name="username">
+
+        <button type="submit">Subir nuevo Podcast</button>
+    </form>
+
+    {# Boton para cargar los podcast asociados a un usuario #}
+    <a href="{{ path('misPodcast', {'email': email}) }}">Cargar mis podcast</a>
+
+    {# Ventana modal estado de la subida. #}
+    {% if subidaCorrecta is not null %}
+        <div id="ModalCorrecto" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Carga Correcta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span id="closeModal" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ subidaCorrecta }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="closeModalbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <script>
+        $('#closeModal').click(function(){
+            $('#ModalCorrecto').addClass('modalOff');
+        });
+        $('#closeModalbtn').click(function(){
+            $('#ModalCorrecto').addClass('modalOff');
+        });
+    </script>
+</div>
+{% endblock %}
