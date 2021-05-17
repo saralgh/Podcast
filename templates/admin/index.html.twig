@@ -1,0 +1,25 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block user_menu %}
+    {% if ea.userMenu.items|length > 0 %}
+        <div class="popover-content-section user-menu">
+            {% for item in ea.userMenu.items %}
+                {% if item.isMenuSection %}
+                    <hr class="m-0" />
+                {% else %}
+                    <a href="{{ item.linkUrl }}" class="user-action {{ item.cssClass }}" target="{{ item.linkTarget }}" rel="{{ item.linkRel }}" referrerpolicy="origin-when-cross-origin">
+                        {% if item.icon is not empty %}<i class="fa fa-fw {{ item.icon }}"></i>{% endif %}
+                        <span>{{ item.label }}</span>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock user_menu %}
+
+{% block header_custom_menu %}
+    <div class="user user-menu-wrapper" data-toggle="popover" data-placement="bottom" data-container=".user-menu-wrapper" data-content="{{ _user_menu_content|e('html_attr') }}" data-html="true">
+        <i class="fa fa-fw fa-user-circle user-avatar"></i>
+        <span class="user-name">{{ user }}</span>
+    </div>
+{% endblock %}

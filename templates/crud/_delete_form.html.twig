@@ -1,0 +1,6 @@
+<div class="col-1 text-right">
+    <form method="post" action="{{ path('crud_delete', {'id': podcast.id}) }}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este registro?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ podcast.id) }}">
+        <button class="btn btn-primary color-red">Eliminar</button>
+    </form>
+</div>

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginAdminController!{% endblock %}
+
+{% block body %}
+<style>
+    html, body {
+        background: none;
+    }
+</style>
+
+{% if mensaje is defined%}
+    <div class="alert alert-danger" role="alert">
+        <p> {{ mensaje }} </p>
+    </div>
+{% endif %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-6 offset-3 mt-5">
+            <div class="card">
+                <h5 class="card-header">Dark Podcast</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingresa tus datos: </h5>
+                    
+                    <form id="adminLogin" class="adminLogin" action="{{ path('compruebaUser') }}" method="POST">
+                        <input type="email" id="emailUser" name="emailUser" placeholder="Email">
+                        <input type="password" id="passwordUser" name="passwordUser" placeholder="Contraseña">
+                        <button type="submit" class="btn btn-primary color-violet">Ingresar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Podcast{% endblock %}
+
+{% block body %}
+    <div class="mb-3 text-white justify-content-end">
+        <span class="infoLoggin">Estas loggeado como <span id="username" name="username">{{ userEmail }}</span> <a class="logout" href="{{ path('app_logout') }}">Cerrar sesión</a></span>
+    </div>
+
+    <h1>Podcast - {{ podcast.tittle }}</h1>
+
+    <div class="container">
+        <div class="row mb-5">
+            <a href="{{ path('dashboard') }}" class="btn btn-primary color-violet"><i class="bi bi-caret-left-fill"></i> Volver a la lista de Podcasts</a>
+        </div>
+
+        <div class="row">
+            <div class="col-10 offset-1">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Título</th>
+                            <td>{{ podcast.tittle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Fecha de Creacion</th>
+                            <td>{{ podcast.fechaCreacion ? podcast.fechaCreacion|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción</th>
+                            <td>{{ podcast.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Audio</th>
+                            <td>
+                                <audio controls>
+                                    <source src="{{ asset('uploads/audio/' ~ podcast.Audio) }}" type="audio/mpeg">
+                                    Tu navegador no soporta el fichero de audio.
+                                </audio>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Imagen</th>
+                            <td><img src="{{ asset('uploads/imagen/' ~ podcast.Imagen)}}" class="imagenPodcast"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-1 offset-10 text-right">
+                <a href="{{ path('crud_edit', {'id': podcast.id}) }}" class="btn btn-primary color-violet">Editar</a>
+            </div>
+            {{ include('crud/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

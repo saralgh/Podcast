@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Podcast{% endblock %}
+
+{% block body %}
+    <div class="mb-3 text-white justify-content-end">
+        <span class="infoLoggin">Estas loggeado como <span id="username" name="username">{{ userEmail }}</span> <a class="logout" href="{{ path('app_logout') }}">Cerrar sesión</a></span>
+    </div>
+
+    <div class="container">
+        <h1>Crea tu nuevo Podcast</h1>
+
+        <div class="row mb-5">
+            <a href="{{ path('dashboard') }}" class="btn btn-primary color-violet"><i class="bi bi-caret-left-fill"></i> Volver a la lista de podcasts</a>
+        </div>
+        <div class="row">
+            <div class="col-6 offset-3">
+                {{ include('crud/_form.html.twig') }}
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-2 offset-5">
+                <button class="btn btn-primary color-violet">{{ button_label|default('Guardar') }}</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

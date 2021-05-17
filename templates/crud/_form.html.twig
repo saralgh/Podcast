@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+    {#{{ form_widget(form) }}#}
+    <div class="row">
+        <div class="col-12">
+            {{ form_row(form.tittle, {
+                label: 'Título', 
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            {{ form_row(form.description, {
+                label: 'Descripción',
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-2 offset-2">
+            {{ form_row(form.Audio) }}
+        </div>
+        <div class="col-2 offset-2">
+            {{ form_row(form.Imagen) }}
+        </div>
+    </div>
+{{ form_end(form) }}

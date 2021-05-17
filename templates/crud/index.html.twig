@@ -1,0 +1,35 @@
+{% block body %}
+    <div class="podcastList">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Fecha de Creacion</th>
+                    <th>Descripción</th>
+                    <th>Audio</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for podcast in podcasts %}
+                <tr>
+                    <td>{{ podcast.tittle }}</td>
+                    <td>{{ podcast.fechaCreacion ? podcast.fechaCreacion|date('Y-m-d') : '' }}</td>
+                    <td>{{ podcast.description }}</td>
+                    <td>{{ podcast.Audio }}</td>
+                    <td>{{ podcast.Imagen }}</td>
+                    <td>
+                        <a href="{{ path('crud_show', {'id': podcast.id, 'userEmail': user.email}) }}">Ver</a>
+                        <a href="{{ path('crud_edit', {'id': podcast.id, 'userEmail':  user.email}) }}">Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">No se han encontrado registros.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
